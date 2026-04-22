@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nexus | Command Recruitment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(10, 15, 30, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-primary: #818cf8; 
+            --accent-cyan: #2dd4bf; 
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            background: radial-gradient(circle at 10% 10%, #1e1b4b 0%, #020617 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+        }
+
+        .glass-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 50px;
+            width: 100%;
+            max-width: 850px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(135deg, #fff 40%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .ist-tracker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 8px 18px;
+            background: rgba(45, 212, 191, 0.05);
+            border-radius: 100px;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .section-tag {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-primary);
+            margin: 40px 0 25px;
+            border-left: 3px solid var(--accent-primary);
+            padding-left: 15px;
+        }
+
+        .form-group { margin-bottom: 30px; }
+
+        .grid-half {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label { display: block; font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: #fff;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- Visual Role Selection Grid --- */
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .role-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .role-card.selected {
+            border-color: var(--accent-cyan);
+            background: rgba(45, 212, 191, 0.1);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
+        }
+
+        .role-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .role-card span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--accent-primary), #6366f1);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4); }
+        button:disabled { background: #334155; cursor: not-allowed; }
+
+        @media (max-width: 600px) { .grid-half { grid-template-columns: 1fr; } .role-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="glass-container">
+    <header>
+        <h1>THE NEXUS</h1>
+        <div class="ist-tracker">
+            <span id="pulsive-dot">●</span> IST: <span id="clock">--:--:--</span>
+        </div>
+    </header>
+
+    <form id="appForm">
+        <span class="section-tag">01 / Credentials</span>
+        <div class="grid-half">
+            <div class="form-group">
+                <label>Discord Username</label>
+                <input type="text" id="username" placeholder="e.g. NexusUser" required>
+            </div>
+            <div class="form-group">
+                <label>Discord ID</label>
+                <input type="text" id="userid" placeholder="18-digit ID" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Select Target Role</label>
+            <div class="role-grid" id="roleGrid">
+                <div class="role-card" data-role="1 - Developer"><div class="role-icon">💻</div><span>Developer</span></div>
+                <div class="role-card" data-role="2 - Admin"><div class="role-icon">🛡️</div><span>Admin</span></div>
+                <div class="role-card" data-role="3 - Moderator"><div class="role-icon">⚖️</div><span>Moderator</span></div>
+                <div class="role-card" data-role="4 - Helper"><div class="role-icon">🤝</div><span>Helper</span></div>
+                <div class="role-card" data-role="5 - Staff"><div class="role-icon">👤</div><span>Staff</span></div>
+            </div>
+            <input type="hidden" id="selectedRole" required>
+        </div>
+
+        <span class="section-tag">02 / Insight & Leadership</span>
+        <div class="form-group"><label>Consistency Audit</label><textarea id="q1" placeholder="What isn't handled consistently?"></textarea></div>
+        <div class="form-group"><label>The Welcome Balance</label><textarea id="q2"></textarea></div>
+        <div class="form-group"><label>Fairness Framework</label><textarea id="q3"></textarea></div>
+        <div class="form-group"><label>Engagement Growth</label><textarea id="q4"></textarea></div>
+        <div class="form-group"><label>System Accountability</label><textarea id="q5"></textarea></div>
+
+        <button type="submit" id="submitBtn">Transmit Application</button>
+    </form>
+</div>
+
+<script>
+    const WEBHOOK = 'https://discord.com/api/webhooks/1496451644047626341/-U33Jxk9KuQkGh_1HghAoVj0zQC9YOtv3dynlnQLYKPi8TV9Aas1hwnWuddXspbsmFR0';
+
+    // IST Clock
+    function updateIST() {
+        const now = new Date();
+        document.getElementById('clock').textContent = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true });
+    }
+    setInterval(updateIST, 1000); updateIST();
+
+    // Role Selection
+    const cards = document.querySelectorAll('.role-card');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            cards.forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            document.getElementById('selectedRole').value = card.dataset.role;
+        });
+    });
+
+    // Submit to Discord
+    document.getElementById('appForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const role = document.getElementById('selectedRole').value;
+        if (!role) return alert("Please select a role first!");
+
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "TRANSMITTING...";
+        btn.disabled = true;
+
+        const payload = {
+            embeds: [{
+                title: "🚀 New Nexus Staff Application",
+                color: 8501240,
+                fields: [
+                    { name: "👤 Applicant", value: `${document.getElementById('username').value} (ID: ${document.getElementById('userid').value})`, inline: true },
+                    { name: "🎯 Role Requested", value: `**${role}**`, inline: true },
+                    { name: "🚩 Issue Consistency", value: document.getElementById('q1').value || "N/A" },
+                    { name: "🤝 Balancing Rules", value: document.getElementById('q2').value || "N/A" },
+                    { name: "⚖️ Fairness", value: document.getElementById('q3').value || "N/A" },
+                    { name: "📈 Engagement", value: document.getElementById('q4').value || "N/A" },
+                    { name: "🛡 Accountability", value: document.getElementById('q5').value || "N/A" }
+                ],
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        try {
+            await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            alert("Application transmitted to Nexus Command.");
+            e.target.reset();
+            cards.forEach(c => c.classList.remove('selected'));
+        } catch (err) {
+            alert("Transmission failed. Try again later.");
+        } finally {
+            btn.innerText = "Transmit Application";
+            btn.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>
